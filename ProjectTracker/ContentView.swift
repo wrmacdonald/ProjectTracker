@@ -8,14 +8,31 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var project = Project()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            VStack {
+                Text(project.name)
+                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                
+                Text("Start date: \(project.startDate.formatted(date: .complete, time: .omitted))")
+                Text("End date: \(project.completionDate.formatted(date: .complete, time: .omitted))")
+//                Text(project.startDate.description)
+                Text("Full Days Until End Day: \(String(project.daysTillCompletion))")
+                Text("Total Project Work Days Until End Day: \(String(project.workDaysTillCompletion))")
+                Text("Remaining Work Days Until End Day: \(String(project.workDaysCurrTillCompletion))") 
+//                Text(project.completionDate.description)
+            }
+            .navigationTitle("Project Tracker")
+            .toolbar {
+                NavigationLink {
+                    AddProjectView(project: project)
+                } label: {
+                    Label("Add New Project", systemImage: "square.and.pencil")
+                }
+            }
         }
-        .padding()
     }
 }
 

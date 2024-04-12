@@ -23,6 +23,12 @@ extension Calendar {
         let toDate = startOfDay(for: to)
         let days = dateComponents([.day], from: fromDate, to: toDate).day!
         var workDayCount = 0
+        
+        // ensure from date is before to date
+        guard from < to else {
+            return 0
+        }
+        
         for day in 0..<days {
             let date = Calendar.current.date(byAdding: .day, value: day, to: fromDate)!
             let dateNum = Int(date.formatted(Date.FormatStyle().weekday(.oneDigit))) ?? -1
@@ -38,18 +44,18 @@ extension Calendar {
 class Project {
     var name = ""
     var startDate = Date()
-    var completionDate = Date()
+    var endDate = Date()
     let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     var availableWorkDays = [2, 3, 4, 5, 6]
     
     var calendar = Calendar(identifier: .gregorian)
     var daysTillCompletion: Int {
-        return calendar.numberOfDaysBetween(startDate, and: completionDate)
+        return calendar.numberOfDaysBetween(startDate, and: endDate)
     }
-    var workDaysTillCompletion: Int {
-        return calendar.numberOfWorkDaysBetween(from: startDate, to: completionDate, availableDays: availableWorkDays)
+    var workDaysUntilEnd: Int {
+        return calendar.numberOfWorkDaysBetween(from: startDate, to: endDate, availableDays: availableWorkDays)
     }
-    var workDaysCurrTillCompletion: Int {
-        return calendar.numberOfWorkDaysBetween(from: Date.now, to: completionDate, availableDays: availableWorkDays)
+    var workDaysRemainingUntilEnd: Int {
+        return calendar.numberOfWorkDaysBetween(from: Date.now, to: endDate, availableDays: availableWorkDays)
     }
 }

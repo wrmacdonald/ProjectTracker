@@ -23,7 +23,7 @@ struct AddProjectView: View {
                     )
                     DatePicker(
                         "Completion Date",
-                        selection: $project.completionDate,
+                        selection: $project.endDate,
                         displayedComponents: [.date]
                     )
                 }

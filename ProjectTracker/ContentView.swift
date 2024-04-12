@@ -17,11 +17,11 @@ struct ContentView: View {
                     .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                 
                 Text("Start date: \(project.startDate.formatted(date: .complete, time: .omitted))")
-                Text("End date: \(project.completionDate.formatted(date: .complete, time: .omitted))")
+                Text("End date: \(project.endDate.formatted(date: .complete, time: .omitted))")
                 Divider()
                 Text("Full Days Until End Day: \(String(project.daysTillCompletion))")
-                Text("Total Project Work Days: \(String(project.workDaysTillCompletion))")
-                Text("Remaining Work Days Until End Day: \(String(project.workDaysCurrTillCompletion))")
+                Text("Total Project Work Days: \(String(project.workDaysUntilEnd))")
+                Text("Remaining Work Days Until End Day: \(String(project.workDaysRemainingUntilEnd))")
             }
             .navigationTitle("Project Tracker")
             .toolbar {

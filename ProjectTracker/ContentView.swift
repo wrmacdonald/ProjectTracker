@@ -18,11 +18,10 @@ struct ContentView: View {
                 
                 Text("Start date: \(project.startDate.formatted(date: .complete, time: .omitted))")
                 Text("End date: \(project.completionDate.formatted(date: .complete, time: .omitted))")
-//                Text(project.startDate.description)
+                Divider()
                 Text("Full Days Until End Day: \(String(project.daysTillCompletion))")
-                Text("Total Project Work Days Until End Day: \(String(project.workDaysTillCompletion))")
-                Text("Remaining Work Days Until End Day: \(String(project.workDaysCurrTillCompletion))") 
-//                Text(project.completionDate.description)
+                Text("Total Project Work Days: \(String(project.workDaysTillCompletion))")
+                Text("Remaining Work Days Until End Day: \(String(project.workDaysCurrTillCompletion))")
             }
             .navigationTitle("Project Tracker")
             .toolbar {

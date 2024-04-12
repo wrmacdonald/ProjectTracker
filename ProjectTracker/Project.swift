@@ -32,7 +32,8 @@ extension Calendar {
         for day in 0..<days {
             let date = Calendar.current.date(byAdding: .day, value: day, to: fromDate)!
             let dateNum = Int(date.formatted(Date.FormatStyle().weekday(.oneDigit))) ?? -1
-            if availableDays.contains(dateNum) {
+            let dayArrayIndex = dateNum - 1    // convert into array index
+            if availableDays.contains(dayArrayIndex) {
                 workDayCount += 1
             }
         }
@@ -46,7 +47,7 @@ class Project {
     var startDate = Date()
     var endDate = Date()
     let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-    var availableWorkDays = [2, 3, 4, 5, 6]
+    var availableWorkDays = [1, 2, 3, 4, 5]     // by index of days array (default: weekdays)
     
     var calendar = Calendar(identifier: .gregorian)
     var daysTillCompletion: Int {

@@ -21,7 +21,7 @@ struct ContentView: View {
                 Divider()
                 Text("Full Days Until End Day: \(String(project.daysTillCompletion))")
                 Text("Total Project Work Days: \(String(project.workDaysUntilEnd))")
-                Text("Remaining Work Days Until End Day: \(String(project.workDaysRemainingUntilEnd))")
+                Text("Full Work Days Remaining: \(String(project.workDaysRemainingUntilEnd))")
             }
             .navigationTitle("Project Tracker")
             .toolbar {

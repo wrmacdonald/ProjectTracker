@@ -7,6 +7,27 @@
 
 import SwiftUI
 
+struct DaysTile: View {
+    let days: Int
+    let description: String
+    
+    var body: some View {
+        VStack {
+            Text(String(days))
+                .font(.largeTitle)
+            Text(description)
+                .font(.subheadline)
+                .multilineTextAlignment(.center)
+        }
+//        .frame(width: 120, height: 120, alignment: .center)
+        .frame(minWidth: 140, maxWidth: 160, minHeight: 140, maxHeight: 160)
+        .background(.purple)
+        .cornerRadius(10)
+        .foregroundStyle(.white)
+        .shadow(radius: 5)
+    }
+}
+
 struct ContentView: View {
     @State private var project = Project()
     
@@ -16,13 +37,21 @@ struct ContentView: View {
                 Text(project.name)
                     .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                 
-                Text("Start date: \(project.startDate.formatted(date: .complete, time: .omitted))")
-                Text("End date: \(project.endDate.formatted(date: .complete, time: .omitted))")
-                Divider()
-                Text("Full Days Until End Day: \(String(project.daysTillCompletion))")
-                Text("Total Project Work Days: \(String(project.workDaysUntilEnd))")
-                Text("Full Work Days Remaining: \(String(project.workDaysRemainingUntilEnd))")
+                Text("Start Date: \(project.startDate.formatted(date: .abbreviated, time: .omitted))")
+                Text("End Date: \(project.endDate.formatted(date: .abbreviated, time: .omitted))")
+                
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
+                    DaysTile(
+                        days: project.workDaysUntilEnd,
+                        description: "Total Project Work Days"
+                    )
+                    DaysTile(
+                        days: project.workDaysRemainingUntilEnd,
+                        description: "Full Work Days Remaining"
+                    )
+                }
             }
+            .padding()
             .navigationTitle("Project Tracker")
             .toolbar {
                 NavigationLink {

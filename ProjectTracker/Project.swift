@@ -43,7 +43,7 @@ extension Calendar {
 
 @Observable
 class Project {
-    var name = ""
+    var name = "Example Project"
     var startDate = Date()
     var endDate = Date()
     let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]

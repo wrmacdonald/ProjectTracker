@@ -5,6 +5,7 @@
 //  Created by Wes MacDonald on 4/11/24.
 //
 
+import SwiftData
 import SwiftUI
 
 struct DaysTile: View {
@@ -29,33 +30,41 @@ struct DaysTile: View {
 }
 
 struct ContentView: View {
-    @State private var project = Project()
+//    @State private var project = Project()
+    @Environment(\.modelContext) var modelContext
+    @Query var projects: [Project]
     
     var body: some View {
         NavigationStack {
-            VStack {
-                Text(project.name)
-                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+            List {
+//                Text("Project count: \(projects.count)")
                 
-                Text("Start Date: \(project.startDate.formatted(date: .abbreviated, time: .omitted))")
-                Text("End Date: \(project.endDate.formatted(date: .abbreviated, time: .omitted))")
-                
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
-                    DaysTile(
-                        days: project.workDaysUntilEnd,
-                        description: "Total Project Work Days"
-                    )
-                    DaysTile(
-                        days: project.workDaysRemainingUntilEnd,
-                        description: "Full Work Days Remaining"
-                    )
+                ForEach(projects) { project in
+                    VStack {
+                        Text(project.name)
+                            .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                        
+                        Text("Start Date: \(project.startDate.formatted(date: .abbreviated, time: .omitted))")
+                        Text("End Date: \(project.endDate.formatted(date: .abbreviated, time: .omitted))")
+                        
+                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
+                            DaysTile(
+                                days: project.workDaysUntilEnd,
+                                description: "Total Project Work Days"
+                            )
+                            DaysTile(
+                                days: project.workDaysRemainingUntilEnd,
+                                description: "Full Work Days Remaining"
+                            )
+                        }
+                    }
                 }
             }
             .padding()
             .navigationTitle("Project Tracker")
             .toolbar {
                 NavigationLink {
-                    AddProjectView(project: project)
+                    AddProjectView()
                 } label: {
                     Label("Add New Project", systemImage: "square.and.pencil")
                 }

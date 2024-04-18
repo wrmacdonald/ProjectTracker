@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftData
 
 extension Calendar {
     func numberOfDaysBetween(_ from: Date, and to: Date) -> Int {
@@ -41,15 +42,15 @@ extension Calendar {
     }
 }
 
-@Observable
+@Model
 class Project {
     var name = "Example Project"
     var startDate = Date()
     var endDate = Date()
     let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     var availableWorkDays = [1, 2, 3, 4, 5]     // by index of days array (default: weekdays)
-    
     var calendar = Calendar(identifier: .gregorian)
+    
     var daysTillCompletion: Int {
         return calendar.numberOfDaysBetween(startDate, and: endDate)
     }
@@ -58,5 +59,17 @@ class Project {
     }
     var workDaysRemainingUntilEnd: Int {
         return calendar.numberOfWorkDaysBetween(from: Date.now, to: endDate, availableDays: availableWorkDays)
+    }
+    
+    init(
+        name: String,
+        startDate: Date,
+        endDate: Date,
+        availableWorkDays: [Int]
+    ) {
+        self.name = name
+        self.startDate = startDate
+        self.endDate = endDate
+        self.availableWorkDays = availableWorkDays
     }
 }

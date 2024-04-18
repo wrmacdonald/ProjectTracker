@@ -5,6 +5,7 @@
 //  Created by Wes MacDonald on 4/11/24.
 //
 
+import SwiftData
 import SwiftUI
 
 @main
@@ -13,5 +14,6 @@ struct ProjectTrackerApp: App {
         WindowGroup {
             ContentView()
         }
+        .modelContainer(for: Project.self)
     }
 }

@@ -14,14 +14,15 @@ struct AddProjectView: View {
     @State private var name = "Example Project"
     @State private var startDate = Date()
     @State private var endDate = Date()
-    @State private var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     @State private var availableWorkDays = [1, 2, 3, 4, 5]
+    
+    @State private var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
 
     
     var body: some View {
         NavigationStack {
             Form {
-                Section {
+                Section("Project Information") {
                     TextField("Project Name", text: $name)
                     DatePicker(
                         "Start Date",

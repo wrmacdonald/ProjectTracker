@@ -44,20 +44,23 @@ extension Calendar {
 
 @Model
 class Project {
-    var name = "Example Project"
-    var startDate = Date()
-    var endDate = Date()
-    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-    var availableWorkDays = [1, 2, 3, 4, 5]     // by index of days array (default: weekdays)
-    var calendar = Calendar(identifier: .gregorian)
+    var name: String
+    var startDate: Date
+    var endDate: Date
+    var availableWorkDays: [Int]     // by index of days array (0=Sun, 1=Mon...) (default: weekdays)
     
-    var daysTillCompletion: Int {
+//    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+
+    var numDaysStartUntilEnd: Int {
+        let calendar = Calendar(identifier: .gregorian)
         return calendar.numberOfDaysBetween(startDate, and: endDate)
     }
-    var workDaysUntilEnd: Int {
+    var numWorkDaysStartUntilEnd: Int {
+        let calendar = Calendar(identifier: .gregorian)
         return calendar.numberOfWorkDaysBetween(from: startDate, to: endDate, availableDays: availableWorkDays)
     }
-    var workDaysRemainingUntilEnd: Int {
+    var numWorkDaysNowUntilEnd: Int {
+        let calendar = Calendar(identifier: .gregorian)
         return calendar.numberOfWorkDaysBetween(from: Date.now, to: endDate, availableDays: availableWorkDays)
     }
     

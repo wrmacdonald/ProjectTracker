@@ -34,30 +34,36 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(projects) { project in
-                    NavigationLink(value: project) {
-                        HStack {
-                            DaysTile(
-                                days: project.numWorkDaysNowUntilEnd,
-                                description: "Work Days Remaining"
-                            )
-                            .padding(.trailing, 5)
-                            
-                            VStack(alignment: .leading) {
-                                Text(project.name)
-                                    .font(.title)
-                                
-                                Text("Start: \(project.startDate.formatted(date: .abbreviated, time: .omitted))")
-                                    .foregroundStyle(.secondary)
-                                
-                                Text("End: \(project.endDate.formatted(date: .abbreviated, time: .omitted))")
-                                    .foregroundStyle(.secondary)
+            Group {
+                if projects.isEmpty {
+                    ContentUnavailableView("Enter your first project.", systemImage: "clipboard")
+                } else {
+                    List {
+                        ForEach(projects) { project in
+                            NavigationLink(value: project) {
+                                HStack {
+                                    DaysTile(
+                                        days: project.numWorkDaysNowUntilEnd,
+                                        description: "Work Days Remaining"
+                                    )
+                                    .padding(.trailing, 5)
+                                    
+                                    VStack(alignment: .leading) {
+                                        Text(project.name)
+                                            .font(.title)
+                                        
+                                        Text("Start: \(project.startDate.formatted(date: .abbreviated, time: .omitted))")
+                                            .foregroundStyle(.secondary)
+                                        
+                                        Text("End: \(project.endDate.formatted(date: .abbreviated, time: .omitted))")
+                                            .foregroundStyle(.secondary)
+                                    }
+                                }
                             }
                         }
+                        .onDelete(perform: deleteProjects)
                     }
                 }
-                .onDelete(perform: deleteProjects)
             }
             .navigationTitle("Project Tracker")
             .toolbar {
@@ -79,58 +85,62 @@ struct ContentView: View {
 }
 
 #Preview {
-    do {
-        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: Project.self, configurations: config)
-        
-        let calendar = Calendar.current
-        var components = DateComponents()
-        
-        components.day = 4
-        let fourDaysOut = calendar.date(byAdding: components, to: .now)
-        let example = Project(
-            name: "Draw a whole book!",
-            startDate: .now,
-            endDate: fourDaysOut!,
-            availableWorkDays: [1,2,3]
-        )
-        container.mainContext.insert(example)
-        
-        components.year = 2024
-        components.month = 3
-        components.day = 20
-        if let date = calendar.date(from: components) {
-            let example2 = Project(
-                name: "Test Project 2",
-                startDate: date,
-                endDate: .now,
-                availableWorkDays: [1,2,3]
-            )
-            container.mainContext.insert(example2)
-        }
-        
-        components.year = 2024
-        components.month = 4
-        components.day = 18
-        if let date = calendar.date(from: components) {
-            components.year = 2024
-            components.month = 4
-            components.day = 24
-            if let date2 = calendar.date(from: components) {
-                let example2 = Project(
-                    name: "Octopus Book",
-                    startDate: date,
-                    endDate: date2,
-                    availableWorkDays: [1,2,3,4,5]
-                )
-                container.mainContext.insert(example2)
-            }
-        }
-            
-        
-        return ContentView()
-            .modelContainer(container)
-    } catch {
-        return Text("Failed to created preview: \(error.localizedDescription)")
-    }
+    ContentView()
+        .modelContainer(for: Project.self, inMemory: true)
+    
+// Example Projects: 
+//    do {
+//        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+//        let container = try ModelContainer(for: Project.self, configurations: config)
+//        
+//        let calendar = Calendar.current
+//        var components = DateComponents()
+//        
+//        components.day = 4
+//        let fourDaysOut = calendar.date(byAdding: components, to: .now)
+//        let example = Project(
+//            name: "Draw a whole book!",
+//            startDate: .now,
+//            endDate: fourDaysOut!,
+//            availableWorkDays: [1,2,3]
+//        )
+//        container.mainContext.insert(example)
+//        
+//        components.year = 2024
+//        components.month = 3
+//        components.day = 20
+//        if let date = calendar.date(from: components) {
+//            let example2 = Project(
+//                name: "Test Project 2",
+//                startDate: date,
+//                endDate: .now,
+//                availableWorkDays: [1,2,3]
+//            )
+//            container.mainContext.insert(example2)
+//        }
+//        
+//        components.year = 2024
+//        components.month = 4
+//        components.day = 18
+//        if let date = calendar.date(from: components) {
+//            components.year = 2024
+//            components.month = 4
+//            components.day = 24
+//            if let date2 = calendar.date(from: components) {
+//                let example2 = Project(
+//                    name: "Octopus Book",
+//                    startDate: date,
+//                    endDate: date2,
+//                    availableWorkDays: [1,2,3,4,5]
+//                )
+//                container.mainContext.insert(example2)
+//            }
+//        }
+//            
+//        
+//        return ContentView()
+//            .modelContainer(container)
+//    } catch {
+//        return Text("Failed to created preview: \(error.localizedDescription)")
+//    }
 }

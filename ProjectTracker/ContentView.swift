@@ -39,7 +39,7 @@ struct ContentView: View {
                     ContentUnavailableView("Enter your first project.", systemImage: "clipboard")
                 } else {
                     List {
-                        ForEach(projects) { project in
+                        ForEach(projects, id: \.self) { project in
                             NavigationLink(value: project) {
                                 HStack {
                                     DaysTile(
@@ -66,6 +66,9 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("Project Tracker")
+            .navigationDestination(for: Project.self) { project in
+                ProjectDetailView(project: project)
+            }
             .toolbar {
                 NavigationLink {
                     AddProjectView()
@@ -88,7 +91,7 @@ struct ContentView: View {
     ContentView()
         .modelContainer(for: Project.self, inMemory: true)
     
-// Example Projects: 
+// Example Projects:
 //    do {
 //        let config = ModelConfiguration(isStoredInMemoryOnly: true)
 //        let container = try ModelContainer(for: Project.self, configurations: config)

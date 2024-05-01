@@ -20,54 +20,52 @@ struct AddProjectView: View {
 
     
     var body: some View {
-        NavigationStack {
-            Form {
-                Section("Project Information") {
-                    TextField("Project Name", text: $name)
-                    DatePicker(
-                        "Start Date",
-                        selection: $startDate,
-                        displayedComponents: [.date]
-                    )
-                    DatePicker(
-                        "Completion Date",
-                        selection: $endDate,
-                        displayedComponents: [.date]
-                    )
-                }
-                
-                Section("What days are you available to work?") {
-                    HStack {
-                        ForEach(0..<days.count, id:\.self) { i in
-                            Text(days[i])
-                                .foregroundStyle(.black)
-                                .frame(width: 40, height: 30)
-                                .background(
-                                    availableWorkDays.contains(i) ? Color.blue.clipShape(.rect(cornerRadius: 5)) : Color.gray.clipShape(.rect(cornerRadius: 5)))
-                                .onTapGesture {
-                                    if availableWorkDays.contains(i) {
-                                        availableWorkDays.removeAll(where: {$0 == i})
-                                    } else {
-                                        availableWorkDays.append(i)
-                                    }
+        Form {
+            Section("Project Information") {
+                TextField("Project Name", text: $name)
+                DatePicker(
+                    "Start Date",
+                    selection: $startDate,
+                    displayedComponents: [.date]
+                )
+                DatePicker(
+                    "Completion Date",
+                    selection: $endDate,
+                    displayedComponents: [.date]
+                )
+            }
+            
+            Section("What days are you available to work?") {
+                HStack {
+                    ForEach(0..<days.count, id:\.self) { i in
+                        Text(days[i])
+                            .foregroundStyle(.black)
+                            .frame(width: 40, height: 30)
+                            .background(
+                                availableWorkDays.contains(i) ? Color.blue.clipShape(.rect(cornerRadius: 5)) : Color.gray.clipShape(.rect(cornerRadius: 5)))
+                            .onTapGesture {
+                                if availableWorkDays.contains(i) {
+                                    availableWorkDays.removeAll(where: {$0 == i})
+                                } else {
+                                    availableWorkDays.append(i)
                                 }
-                        }
+                            }
                     }
                 }
-                
-                Button("Save") {
-                    let newProject = Project(
-                        name: name,
-                        startDate: startDate,
-                        endDate: endDate,
-                        availableWorkDays: availableWorkDays
-                    )
-                    modelContext.insert(newProject)
-                    dismiss()
-                }
             }
-            .navigationTitle("Add Project")
+            
+            Button("Save") {
+                let newProject = Project(
+                    name: name,
+                    startDate: startDate,
+                    endDate: endDate,
+                    availableWorkDays: availableWorkDays
+                )
+                modelContext.insert(newProject)
+                dismiss()
+            }
         }
+        .navigationTitle("Add Project")
     }
 }
 

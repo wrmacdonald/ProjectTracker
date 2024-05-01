@@ -63,12 +63,12 @@ struct ContentView: View {
                         }
                         .onDelete(perform: deleteProjects)
                     }
+                    .navigationDestination(for: Project.self) { project in
+                        ProjectDetailView(project: project)
+                    }
                 }
             }
             .navigationTitle("Project Tracker")
-            .navigationDestination(for: Project.self) { project in
-                ProjectDetailView(project: project)
-            }
             .toolbar {
                 NavigationLink {
                     AddProjectView()

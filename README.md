@@ -13,6 +13,6 @@ A native iOS app for planning & tracking progress on projects.
 ## 📸 Screenshots
 <div align="center">
 
-![App after a couple days of development](./_Screenshots/Demo_2024-04-12.gif)
+![App after integrating SwiftData](./_Screenshots/Demo_2024-05-01.gif)
 
 </div>

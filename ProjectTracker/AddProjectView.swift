@@ -56,7 +56,12 @@ struct AddProjectView: View {
                 }
                 
                 Button("Save") {
-                    let newProject = Project(name: name, startDate: startDate, endDate: endDate, availableWorkDays: availableWorkDays)
+                    let newProject = Project(
+                        name: name,
+                        startDate: startDate,
+                        endDate: endDate,
+                        availableWorkDays: availableWorkDays
+                    )
                     modelContext.insert(newProject)
                     dismiss()
                 }

@@ -15,6 +15,7 @@
 		CC567B9F2BC87FF8001723FD /* AddProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC567B9E2BC87FF8001723FD /* AddProjectView.swift */; };
 		CC567BA12BC8A659001723FD /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = CC567BA02BC8A659001723FD /* .gitignore */; };
 		CC567BC92BD5B8DF001723FD /* ProjectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC567BC82BD5B8DF001723FD /* ProjectDetailView.swift */; };
+		CC9BB70F2BE18A320005E6C7 /* EditProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9BB70E2BE18A320005E6C7 /* EditProjectView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		CC567B9E2BC87FF8001723FD /* AddProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProjectView.swift; sourceTree = "<group>"; };
 		CC567BA02BC8A659001723FD /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		CC567BC82BD5B8DF001723FD /* ProjectDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailView.swift; sourceTree = "<group>"; };
+		CC9BB70E2BE18A320005E6C7 /* EditProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				CC567B8E2BC86DFC001723FD /* ProjectTrackerApp.swift */,
 				CC567B9E2BC87FF8001723FD /* AddProjectView.swift */,
 				CC567B902BC86DFC001723FD /* ContentView.swift */,
+				CC9BB70E2BE18A320005E6C7 /* EditProjectView.swift */,
 				CC567BC82BD5B8DF001723FD /* ProjectDetailView.swift */,
 				CC567B9C2BC87A94001723FD /* Project.swift */,
 				CC567B922BC86DFF001723FD /* Assets.xcassets */,
@@ -152,6 +155,7 @@
 			files = (
 				CC567B912BC86DFC001723FD /* ContentView.swift in Sources */,
 				CC567B8F2BC86DFC001723FD /* ProjectTrackerApp.swift in Sources */,
+				CC9BB70F2BE18A320005E6C7 /* EditProjectView.swift in Sources */,
 				CC567BC92BD5B8DF001723FD /* ProjectDetailView.swift in Sources */,
 				CC567B9F2BC87FF8001723FD /* AddProjectView.swift in Sources */,
 				CC567B9D2BC87A94001723FD /* Project.swift in Sources */,

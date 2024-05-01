@@ -60,6 +60,13 @@ struct ProjectDetailView: View {
         }
         .navigationTitle(project.name)
         .scrollBounceBehavior(.basedOnSize)
+        .toolbar {
+            NavigationLink {
+                EditProjectView(project: project)
+            } label: {
+                Label("Edit", systemImage: "pencil")
+            }
+        }
     }
 }
 
